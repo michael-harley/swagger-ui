@@ -1,45 +1,43 @@
 <!-- HTML for static distribution bundle build -->
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8">
-    <title>Swagger UI</title>
-    <link rel="stylesheet" type="text/css" href="./swagger-ui.css" >
-    <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
-    <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
-    <style>
-      html
-      {
-        box-sizing: border-box;
-        overflow: -moz-scrollbars-vertical;
-        overflow-y: scroll;
-      }
 
-      *,
-      *:before,
-      *:after
-      {
-        box-sizing: inherit;
-      }
+<head>
+  <meta charset="UTF-8">
+  <title>Swagger UI</title>
+  <link rel="stylesheet" type="text/css" href="./swagger-ui.css">
+  <link rel="stylesheet" type="text/css" href="./custom.css">
+  <link rel="icon" type="image/png" href="./favicon-32x32.png" sizes="32x32" />
+  <link rel="icon" type="image/png" href="./favicon-16x16.png" sizes="16x16" />
+  <style>
+    html {
+      box-sizing: border-box;
+      overflow: -moz-scrollbars-vertical;
+      overflow-y: scroll;
+    }
 
-      body
-      {
-        margin:0;
-        background: #fafafa;
-      }
-    </style>
-  </head>
+    *,
+    *:before,
+    *:after {
+      box-sizing: inherit;
+    }
 
-  <body>
-    <div id="swagger-ui"></div>
+    body {
+      margin: 0;
+      background: #fafafa;
+    }
+  </style>
+  <script src='./specs/fe-spec.js' type="text/javascript"></script>
+  <script src='./specs/be-spec.js' type="text/javascript"></script>
+</head>
 
-    <script src="./swagger-ui-bundle.js" charset="UTF-8"> </script>
-    <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
-    <script>
-    window.onload = function() {
+<body>
+  <script>
+    function renderUI(spec) {
       // Begin Swagger UI call region
       const ui = SwaggerUIBundle({
-        url: "https://petstore.swagger.io/v2/swagger.json",
+        // url: "https://petstore.swagger.io/v2/swagger.json",
+        spec,
         dom_id: '#swagger-ui',
         deepLinking: true,
         presets: [
@@ -55,6 +53,27 @@
 
       window.ui = ui
     }
+
+    function onFeClick() {
+      renderUI(feSpec)
+    }
+    function onBeClick() {
+      renderUI(beSpec)
+    }
   </script>
-  </body>
+  <div class="header">
+    <div onclick="onFeClick()">Front-end</div>
+    <div onclick="onBeClick()">Back-end</div>
+  </div>
+  <div id="swagger-ui"></div>
+
+  <script src="./swagger-ui-bundle.js" charset="UTF-8"> </script>
+  <script src="./swagger-ui-standalone-preset.js" charset="UTF-8"> </script>
+  <script>
+    window.onload = function () {
+      renderUI(feSpec)
+    }
+  </script>
+</body>
+
 </html>

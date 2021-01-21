@@ -1,0 +1,13 @@
+.header{
+    display: flex;
+    color: white;
+    background-color: rgb(27,27,27);
+}
+.header > div {
+    margin-left: 8px;
+    padding: 4px 8px;
+    cursor: pointer;
+}
+.header > div:first-child {
+    margin-left: 0;
+}
